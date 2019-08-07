@@ -8,21 +8,22 @@ import time
 
 # Global Variable
 module_path = os.path.dirname(__file__)
+png_path = module_path + '/data/nih_sample/images/*.png'
+hdf5_path = module_path + '/data/nih_sample/data.hdf5'
+img_rows, img_cols, img_ch = 1024, 1024, 1
+
 
 def input_image_data():
 
-    # Read PNG data
-    png_path = module_path + '/nih_sample_data/images/*.png'
-    hdf5_path = module_path + '/nih_sample_data/'
-
-    # Prepare data into hdf5
-    img_rows, img_cols, img_ch = 1024, 1024, 1
-    print(png_path)
-
+    x_ray_inputs = [np.random.random((img_rows, img_cols, img_ch)) for i in range(len(glob.glob(png_path)))]
     # read data into keras
-    for filename in glob.glob(png_path):
-        img = load_img(filename)
+    for index, filename in enumerate(glob.glob(png_path)):
+        x_ray_png = load_img(filename, color_mode='grayscale')
+        x_ray_array = img_to_array(x_ray_png)
+        # x_ray_inputs[index] = x_ray_array
+        break
 
+    print(x_ray_inputs.shape)
 
 start_time = time.time()
 

@@ -104,6 +104,6 @@ venv.bak/
 .mypy_cache/
 
 #dataset
-machine_learning/nih_sample_data/*
+machine_learning/data/*
 
 \.vscode/
